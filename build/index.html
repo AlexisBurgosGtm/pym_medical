@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>
+           PRIORITY DOCTOR
+        </title>
+        <meta name="description" content="Blank">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+        <!-- Call App Mode on ios devices -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- Remove Tap Highlight on Windows Phone IE -->
+        <meta name="msapplication-tap-highlight" content="no">
+        
+        <meta name="google" content="notranslate" />
+
+        <!--meta API NOTIFICATION TRIGGER -->
+        <meta http-equiv="origin-trial" content="AoXc696Tyzx1VEktyG/8XWPQy/CkjgHlk7LyHMUw0lq9q2sptFhhDxXboCDXJ8sEj51y6N/nMU0nti3oyb8FlgQAAACAeyJvcmlnaW4iOiJodHRwczovL21lcmNhZG9zZWZlY3Rpdm9zLmhlcm9rdWFwcC5jb206NDQzIiwiZmVhdHVyZSI6Ik5vdGlmaWNhdGlvblRyaWdnZXJzIiwiZXhwaXJ5IjoxNTk1OTgwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZX0=">
+
+        <!-- base css -->
+        <link rel="stylesheet" media="screen, print" href="css/vendors.bundle.css">
+        <link rel="stylesheet" media="screen, print" href="css/app.bundle.css">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
+        <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="stylesheet" media="screen, print" href="css/.../styles.css">
+        <link rel="stylesheet" media="screen, print" href="./css/btn.css">
+
+    
+        <link rel="stylesheet" href="./librerias/animate.min.css">
+        <link rel="stylesheet" href="./libs/leaflet/leaflet.css">
+        <link rel="stylesheet" href="./libs/noty/noty.min.css">
+
+        
+    <!-- service worker -->
+    <meta name="application-name" content="Onne-Doctor" />
+    <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="manifest.json">
+
+    
+    </head>
+    <body class="mod-bg-2 nav-function-top header-function-fixed nav-function-fixed" id="particles-js"><!--mod-disable-animation-->
+        <!-- libreria de funciones propias
+        <script src="https://alexisburgosservice.herokuapp.com/funciones.js"></script>
+        -->
+
+        <!-- DOC: script to save and load page settings -->
+        <script>
+            /**
+             *	This script should be placed right after the body tag for fast execution 
+             *	Note: the script is written in pure javascript and does not depend on thirdparty library
+             **/
+            'use strict';
+
+            var classHolder = document.getElementsByTagName("BODY")[0],
+                /** 
+                 * Load from localstorage
+                 **/
+                themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+                {},
+                themeURL = themeSettings.themeURL || '',
+                themeOptions = themeSettings.themeOptions || '';
+            /** 
+             * Load theme options
+             **/
+            if (themeSettings.themeOptions)
+            {
+                classHolder.className = themeSettings.themeOptions;
+                console.log("%c✔ Theme settings loaded", "color: #148f32");
+            }
+            else
+            {
+                console.log("Heads up! Theme settings is empty or does not exist, loading default settings...");
+            }
+            if (themeSettings.themeURL && !document.getElementById('mytheme'))
+            {
+                var cssfile = document.createElement('link');
+                cssfile.id = 'mytheme';
+                cssfile.rel = 'stylesheet';
+                cssfile.href = themeURL;
+                document.getElementsByTagName('head')[0].appendChild(cssfile);
+            }
+            /** 
+             * Save to localstorage 
+             **/
+            var saveSettings = function()
+            {
+                themeSettings.themeOptions = String(classHolder.className).split(/[^\w-]+/).filter(function(item)
+                {
+                    return /^(nav|header|mod|display)-/i.test(item);
+                }).join(' ');
+                if (document.getElementById('mytheme'))
+                {
+                    themeSettings.themeURL = document.getElementById('mytheme').getAttribute("href");
+                };
+                localStorage.setItem('themeSettings', JSON.stringify(themeSettings));
+            }
+            /** 
+             * Reset settings
+             **/
+            var resetSettings = function()
+            {
+                localStorage.setItem("themeSettings", "");
+            }
+
+        </script>
+
+
+        <!-- BEGIN Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="page-inner">
+                <!-- BEGIN Left Aside -->
+  
+                <!-- END Left Aside -->
+                <div class="page-content-wrapper">
+                    <!-- BEGIN Page Header -->
+                    <!-- hice una modificacion en el css del app bundle, 
+                        cambie la clase page-header bajando el height de 4 a 2 -->
+                    <header class="page-header" role="banner">
+                        <!-- we need this logo when user switches to nav-function-top -->
+                        <div class="page-logo">
+                            <a href="#" class="page-logo-link press-scale-down d-flex align-items-center">
+                                <span class="page-logo-text mr-1" id="txtNomEmpresa"></span>                          
+                            </a>
+                        </div>
+
+                                                      
+                        <div class="ml-auto d-flex">            
+                                                          
+
+                        </div>
+                    </header>
+                    <!-- END Page Header -->
+                    <!-- BEGIN Page Content -->
+                    <!-- the #js-page-content id is needed for some plugins to initialize -->
+                    <main id="js-page-content" role="main" class="page-content">
+                        <div class="oculto-impresion" id="root">
+        
+                        </div>
+            
+                        <div id="rootImpresion">
+                    
+                    
+                        </div>  
+                    </main>
+                        <!-- Internet Connection Status-->
+                        <div class="internet-connection-status" id="internetStatus"></div>
+
+
+                    <div id="" class="shortcut-menu align-left">
+                         <button class="btn btn-danger btn-xl shadow" id="btnInstalarApp">
+                             <i class="fal fa-download"></i>Instalar como Aplicación
+                         </button>
+                    </div>
+
+                                        
+                    <!-- this overlay is activated only when mobile menu is triggered -->
+                    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div> <!-- END Page Content -->
+
+                     <!-- BEGIN Page Footer -->
+                    <footer class="page-footer foot" role="contentinfo" id="footContainer">
+                        <!--
+                        <div class="d-flex align-items-center flex-1 text-muted">    
+                        -->
+                        <div class="d-flex align-items-left" id="rootMenuFooter">
+                           
+                           
+                         
+                                
+                                
+                        </div>
+
+                    </footer>
+                    <!-- END Page Footer -->
+                    <!-- BEGIN Shortcuts -->
+                    
+                </div>
+                
+            </div>
+        </div>
+        <!-- END Page Wrapper -->
+
+     
+        <!-- LISTA DE PRECIOS -->
+        <div class="modal fade js-modal-settings modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true" id="modalListaPrecios">
+            <div class="modal-dialog modal-dialog-right modal-lg">
+                <div class="modal-content">
+                    <div class="dropdown-header d-flex justify-content-center align-items-center w-100">
+                        <h4 class="m-0 text-center " id="">
+                            Lista de Precios
+                            <small class="mb-0 opacity-80">Búsqueda rápida de Precios</small>
+                        </h4>
+                        <button type="button" class="close text-white position-absolute pos-top pos-right p-2 m-1 mr-2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-0">
+                        
+                            <div class="input-group">
+                                <input id="txtBProducto" type="text" ref="txtBusqueda" class="form-control col-7 shadow border-secondary border-left-0 border-right-0 border-top-0" placeholder="Buscar código o descripción..." aria-label="" aria-describedby="button-addon4" />
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary waves-effect waves-themed shadow" type="button" id="btnBProducto">
+                                        <i class="fal fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        
+                        <div class="" id="">
+                            <table class="table table-responsive table-striped table-hover">
+                                <thead class="bg-secondary text-white">
+                                    <tr>
+                                        <td>Producto</td>
+                                        <td>Precio</td>                         
+                                    </tr>
+                                </thead>
+                                <tbody id="tblPre">
+                                
+    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button class="btn btn-sm btn-danger position-absolute pos-bottom pos-right" data-dismiss="modal">
+                            <<- Regresar
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+
+        <script src="js/vendors.bundle.js"></script>
+        <script src="js/app.bundle.js"></script>
+        <script src="js/../script.js"></script>
+  
+
+        <script src="./librerias/sweetalert.min.js"></script>
+        <script src="./librerias/toastr.js"></script>
+        <script src="./librerias/axios.min.js"></script>
+        <script src="./librerias/socket.io.js"></script>
+        <script src="./librerias/funciones.js"></script>
+        <script src="./controllers/GlobalVars.js"></script>
+        <script src="./controllers/classNavegar.js"></script>
+        <script src="./views/GlobalFunctions.js"></script>
+      
+        <script src="./librerias/chart.min.js"></script>
+        <script src="./librerias/chartjs-plugin-datalabels.min.js"></script>
+
+        <script src="./librerias/jsstore/jsstore.min.js"></script>
+        <script src="./librerias/jsstore/jsstore.worker.min.js"></script>
+        <script src="./controllers/classDb.js"></script>
+        <script src="./controllers/dbcalls.js"></script>
+
+        
+        <script src="./librerias/socket.io-3.0.5.min.js"></script>
+        <script src="./librerias/socket-handler.js"></script>
+      
+        <script src="./index.js"></script>
+      
+      
+    </body>
+
+
+</html>

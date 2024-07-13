@@ -1,0 +1,17 @@
+{
+  "name": "priority-doctor",
+  "version": "1.0.0",
+  "description": "sistema para doctores",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "author": "Alexis Burgos",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7",
+    "socket.io": "^4.4.0"
+  }
+}
